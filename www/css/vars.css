@@ -1,0 +1,26 @@
+:root {
+    --link-color: #2196f3;
+    --link-hover-color: #0176c3;
+    --max-page-width: 1000px;
+
+    --panel-dark-bg: #f5f5f5;
+    --panel-light-bg: #f9f9f9;
+
+    --panel-pad: 1rem;
+    --panel-half-pad: .5em;
+    --panel-border: #dfdfdf;
+    --panel-border-light: #eee;
+
+    --border-radius-small: 4px;
+
+    --fs-bigger: 24px;
+    --fs-big: 20px;
+    --hovered-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+
+    --transition-default: .3s;
+
+    --body-color: #555;
+    --label-color: #888;
+
+    --error-color: #f77;
+}

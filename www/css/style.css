@@ -1,0 +1,79 @@
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--link-hover-color);
+}
+
+label {
+    cursor: pointer;
+}
+
+input, textarea {
+    outline: none;
+    border: 1px solid #aaa;
+    padding: 5px;
+}
+
+.sre-container {
+    max-width: var(--max-page-width);
+    margin: 0 auto;
+}
+
+.sre-block, .sre-childs-block > * {
+    display: block;
+    width: 100%;
+}
+
+.sre-pad-v {
+    padding-bottom: var(--panel-pad);
+    padding-top: var(--panel-pad);
+}
+
+.sre-pad-h {
+    padding-left: var(--panel-pad);
+    padding-right: var(--panel-pad);
+}
+
+.sre-pad {
+    padding: var(--panel-pad);
+}
+
+.sre-small-pad-v {
+    padding-bottom: var(--panel-half-pad);
+    padding-top: var(--panel-half-pad);
+}
+
+.sre-small-pad-h {
+    padding-left: var(--panel-half-pad);
+    padding-right: var(--panel-half-pad);
+}
+
+.sre-small-pad {
+    padding: var(--panel-half-pad);
+}
+
+.sre-margin {
+    margin: var(--panel-half-pad);
+}
+
+.sre-fw-n {
+    font-weight: normal;
+}
+
+.sre-error {
+    color: var(--error-color);
+}
+
+.sre-text-right {
+    text-align: right;
+}
+
+.sre-to-right {
+    float: right;
+}
+
+.sre-to-left {
+    float: left;
+}
