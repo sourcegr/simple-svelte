@@ -12,7 +12,6 @@
             'db_password' => 'secret',
         ];
 
-
         /**
          * @param $username - Database user to to use
          * @param $password - Database password for the user
@@ -119,7 +118,7 @@
          * @param array $data - Data binded
          * @return array - The result as an array of arrays
          */
-        public static function as_array($sql, $data = [])
+        public static function rows_as_array($sql, $data = [])
         {
             $data = self::ensureIsArray($data);
 
@@ -154,7 +153,7 @@
          * @param array $data - Data binded
          * @return array|bool - Array of objects on success, false if the query fails
          */
-        public static function as_object($sql, $data = [])
+        public static function rows_as_object($sql, $data = [])
         {
             $data = self::ensureIsArray($data);
 
@@ -170,10 +169,10 @@
 
 
         /**
-         * @param array $data
-         * @return array|array[]
+         * @param mixed $data
+         * @return array
          */
-        protected static function ensureIsArray(array $data)
+        protected static function ensureIsArray($data)
         {
             return gettype($data) !== 'array' ? [$data] : $data;
         }
