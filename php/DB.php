@@ -53,9 +53,7 @@
          */
         public static function get_value($sql, $data = [])
         {
-            if (gettype($data) !== 'array') {
-                $data = [$data];
-            }
+            $data = self::ensureIsArray($data);
 
             $res = self::getInstance()->prepare($sql);
             $res->execute($data);
@@ -71,9 +69,7 @@
          */
         public static function get_values($sql, $data = [])
         {
-            if (gettype($data) !== 'array') {
-                $data = [$data];
-            }
+            $data = self::ensureIsArray($data);
 
             $res = self::getInstance()->prepare($sql);
             try {
@@ -93,9 +89,7 @@
          */
         public static function insert($sql, $data = [])
         {
-            if (gettype($data) !== 'array') {
-                $data = [$data];
-            }
+            $data = self::ensureIsArray($data);
 
             $res = self::getInstance()->prepare($sql);
             // dd($res);
@@ -111,9 +105,7 @@
          */
         public static function update($sql, $data = [])
         {
-            if (gettype($data) !== 'array') {
-                $data = [$data];
-            }
+            $data = self::ensureIsArray($data);
 
             $res = self::getInstance()->prepare($sql);
             // dd($res);
@@ -129,9 +121,7 @@
          */
         public static function as_array($sql, $data = [])
         {
-            if (gettype($data) !== 'array') {
-                $data = [$data];
-            }
+            $data = self::ensureIsArray($data);
 
             $res = self::getInstance()->prepare($sql);
 //             echo "+---> $sql<br />";
@@ -143,18 +133,16 @@
         /**
          * @param string $sql - The SQL to execute
          * @param array $data - Data binded
-         * @return null - nothing. Used for generic queries
+         * @return null|bool - null on success, false if the query fails
          */
         public static function query($sql, $data = [])
         {
-            if (gettype($data) !== 'array') {
-                $data = [$data];
-            }
+            $data = self::ensureIsArray($data);
             $res = self::getInstance()->prepare($sql);
             try {
                 $res->execute($data);
             } catch (Exception $e) {
-                var_dump($e);
+                return false;
             }
 
             return null;
@@ -164,21 +152,29 @@
         /**
          * @param string $sql - The SQL to execute
          * @param array $data - Data binded
-         * @return array - The result as an array of objects
+         * @return array|bool - Array of objects on success, false if the query fails
          */
         public static function as_object($sql, $data = [])
         {
-            if (gettype($data) !== 'array') {
-                $data = [$data];
-            }
+            $data = self::ensureIsArray($data);
 
             $res = self::getInstance()->prepare($sql);
             try {
                 $res->execute($data);
             } catch (Exception $e) {
-                var_dump($e);
+                return false;
             }
 
             return $res->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+
+        /**
+         * @param array $data
+         * @return array|array[]
+         */
+        protected static function ensureIsArray(array $data)
+        {
+            return gettype($data) !== 'array' ? [$data] : $data;
         }
     }
