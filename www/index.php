@@ -9,9 +9,9 @@
 	<link rel='stylesheet' href='/css/vars.css'>
 	<link rel='stylesheet' href='/css/main.css'>
 	<link rel='stylesheet' href='/css/style.css'>
-	<link rel='stylesheet' href='/build/bundle.css'>
+	<link rel='stylesheet' href='/build/bundle.css?_=<?=rand()?>'>
 
-	<script defer src='/build/bundle.js'></script>
+	<script defer src='/build/bundle.js?_=<?=rand()?>'></script>
 </head>
 
 <body>
