@@ -12,7 +12,18 @@
             'db_password' => 'secret',
         ];
 
-        public static function connect($username, $password,  $database, $charset='utf8', $host='localhost', $type='mysql') {
+
+        /**
+         * @param $username - Database user to to use
+         * @param $password - Database password for the user
+         * @param $database - Database name
+         * @param string $charset - The DB encoding. Default is utf8
+         * @param string $host - The host to connect to. Default is localhsot
+         * @param string $type - The type of the DB. Default is MySQL
+         * @return PDO|null
+         * @throws Exception
+         */
+        public static function connect($username, $password, $database, $charset='utf8', $host='localhost', $type='mysql') {
             if (self::$instance) {
                 throw new Exception('Instance already created');
             }
@@ -35,6 +46,11 @@
         }
 
 
+        /**
+         * @param string $sql - The SQL to execute
+         * @param array $data - Data binded
+         * @return mixed - The result of the query
+         */
         public static function get_value($sql, $data = [])
         {
             if (gettype($data) !== 'array') {
@@ -48,6 +64,11 @@
         }
 
 
+        /**
+         * @param string $sql - The SQL to execute
+         * @param array $data - Data binded
+         * @return array - The result of the query as an array
+         */
         public static function get_values($sql, $data = [])
         {
             if (gettype($data) !== 'array') {
@@ -64,6 +85,12 @@
         }
 
 
+
+        /**
+         * @param string $sql - The SQL to execute
+         * @param array $data - Data binded
+         * @return numeric - The ID of the inserted row
+         */
         public static function insert($sql, $data = [])
         {
             if (gettype($data) !== 'array') {
@@ -77,6 +104,11 @@
         }
 
 
+        /**
+         * @param string $sql - The SQL to execute
+         * @param array $data - Data binded
+         * @return null - Returns nothing
+         */
         public static function update($sql, $data = [])
         {
             if (gettype($data) !== 'array') {
@@ -86,10 +118,16 @@
             $res = self::getInstance()->prepare($sql);
             // dd($res);
             $res->execute($data);
+            return null;
         }
 
 
-        public static function get_array($sql, $data = [])
+        /**
+         * @param string $sql - The SQL to execute
+         * @param array $data - Data binded
+         * @return array - The result as an array of arrays
+         */
+        public static function as_array($sql, $data = [])
         {
             if (gettype($data) !== 'array') {
                 $data = [$data];
@@ -102,6 +140,11 @@
         }
 
 
+        /**
+         * @param string $sql - The SQL to execute
+         * @param array $data - Data binded
+         * @return null - nothing. Used for generic queries
+         */
         public static function query($sql, $data = [])
         {
             if (gettype($data) !== 'array') {
@@ -114,11 +157,16 @@
                 var_dump($e);
             }
 
-            return;
+            return null;
         }
 
 
-        public static function q($sql, $data = [])
+        /**
+         * @param string $sql - The SQL to execute
+         * @param array $data - Data binded
+         * @return array - The result as an array of objects
+         */
+        public static function as_object($sql, $data = [])
         {
             if (gettype($data) !== 'array') {
                 $data = [$data];
@@ -133,20 +181,4 @@
 
             return $res->fetchAll(PDO::FETCH_ASSOC);
         }
-    }
-
-
-    function reply($a)
-    {
-        header('Content-Type: application/json');
-        die(json_encode($a));
-    }
-
-    function dd($a) {
-        var_dump($a);
-        die();
-    }
-
-    function getInput() {
-        return json_decode(file_get_contents('php://input'));
     }
